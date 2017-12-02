@@ -13,6 +13,8 @@ import{
 
 import CardOrder from '../components/CardOrder'
 
+import { setTab } from '../actions'
+
 const participants =[{
   name: 'Stedy',
   icon: 'https://scontent.fsub6-3.fna.fbcdn.net/v/t1.0-1/p160x160/995330_1009814712422752_5652905225413807790_n.jpg?oh=1b79fdc3c77bc739aa9f27a1c6fa0464&oe=5A97FE1C'
@@ -36,6 +38,10 @@ class Table extends Component{
       alignSelf: 'center'
     },
   })
+
+  componentWillMount(){
+    this.props.setTab(false)
+  }
 
   render(){
     const { navigate } = this.props.navigation
@@ -98,13 +104,14 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) =>{
   return{
-    order: state.order
+    order : state.order,
+    tab   : state.tab
   }
 }
 
 const mapDispatchToProps = (dispatch) =>{
   return{
-
+    setTab: (status) => dispatch(setTab(status))
   }
 }
 
