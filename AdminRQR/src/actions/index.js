@@ -4,3 +4,10 @@ export const setTab = (status) =>{
     payload: status
   }
 }
+
+export const setPage = (page) =>{
+  return{
+    type: 'Page',
+    payload: page
+  }
+}

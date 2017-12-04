@@ -34,11 +34,13 @@ class App extends Component{
     }
   }
 
+
   render() {
     return (
         <TabNavigator
           tabBarStyle={{ height: (this.props.tab) ?45 :0, overflow: 'hidden' }}
           sceneStyle={{ paddingBottom: 0 }}
+          hideTabTouch={true}
           >
           <TabNavigator.Item
             selected={this.state.selectedTab === 'order'}
