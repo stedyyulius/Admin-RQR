@@ -38,7 +38,7 @@ class Table extends Component{
   })
 
   componentWillMount(){
-    this.props.setTab(false)
+    this.props.setTab(0)
   }
 
   render(){

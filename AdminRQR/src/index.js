@@ -38,7 +38,7 @@ class App extends Component{
   render() {
     return (
         <TabNavigator
-          tabBarStyle={{ height: (this.props.tab) ?45 :0, overflow: 'hidden' }}
+          tabBarStyle={{ height: this.props.tab, overflow: 'hidden' }}
           sceneStyle={{ paddingBottom: 0 }}
           hideTabTouch={true}
           >

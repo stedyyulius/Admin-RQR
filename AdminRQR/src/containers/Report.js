@@ -12,6 +12,8 @@ import {
   TextInput
 } from 'react-native'
 
+import TabHeader from '../components/TabHeader'
+import Customer from '../components/Customer'
 
 class Report extends Component{
   constructor(props){
@@ -27,6 +29,23 @@ class Report extends Component{
     headerTitleStyle: {
       alignSelf: 'center'
     },
+    header:(
+      <View style={styles.searchBar}>
+        <View style={styles.searchColumn}>
+          <Icons name="search" size={20} style={styles.searchIcon} color="white" />
+          <TextInput
+            placeholder="Search Report"
+            style={styles.searchText}
+            placeholderTextColor="white"
+            underlineColorAndroid="transparent"
+            // onFocus={()=> this.setState({onSearch: true})}
+            />
+        </View>
+        <TouchableOpacity style={styles.hamburgerIcon}>
+          <Icons name="navicon" size={20} color="white" />
+        </TouchableOpacity>
+      </View>
+    )
   })
 
   search(){
@@ -37,44 +56,18 @@ class Report extends Component{
 
   render(){
     return(
-      <View>
-        <View style={styles.tabContainer}>
-          <TouchableOpacity style={styles.tabButton}>
-          <Button
-            title="Overview"
-            color="black"
-            onPress={()=> this.setState({page: 'overview'})}
-          />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.tabButton}>
-          <Button
-            title="Customer"
-            color="black"
-            onPress={()=> this.setState({page: 'customer'})}
-          />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.tabButton}>
-          <Button
-            title="Order"
-            color="black"
-            onPress={()=> this.setState({page: 'order'})}
-          />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.searchBar}>
-          <Icons name="search" size={15} style={styles.searchIcon} />
-          <TextInput
-            placeholder="Search"
-            style={styles.searchText}
-            // onFocus={()=> this.setState({onSearch: true})}
-            />
-          <TouchableOpacity style={styles.hamburgerIcon}>
-            <Icons name="navicon" size={15} />
-          </TouchableOpacity>
-        </View>
-
-
-      </View>
+      <ScrollView>
+        <TabHeader tabs={["Customer","Menu"]} />
+        <Customer name="Felix Cahyadi Tio" photo="https://scontent.fsub6-3.fna.fbcdn.net/v/t1.0-1/p160x160/12096566_10153589536696427_3240500719548235275_n.jpg?oh=5772d7971a9bc39de1bf7a789cebff84&oe=5AA6AFB2" />
+        <Customer name="Stedy Yulius" photo="https://scontent.fsub6-3.fna.fbcdn.net/v/t1.0-1/p160x160/995330_1009814712422752_5652905225413807790_n.jpg?oh=1b79fdc3c77bc739aa9f27a1c6fa0464&oe=5A97FE1C" />
+        <Customer name="Brandon Tan" photo="http://pngimg.com/uploads/facebook_logos/facebook_logos_PNG19748.png" />
+        <Customer name="Joko Susilo" photo="http://pngimg.com/uploads/facebook_logos/facebook_logos_PNG19748.png" />
+        <Customer name="Kim Ji Sung" photo="http://pngimg.com/uploads/facebook_logos/facebook_logos_PNG19748.png" />
+        <Customer name="Adi Wijaya" photo="http://pngimg.com/uploads/facebook_logos/facebook_logos_PNG19748.png" />
+        <Customer name="Jake Johnson" photo="http://pngimg.com/uploads/facebook_logos/facebook_logos_PNG19748.png" />
+        <Customer name="John Doe" photo="http://pngimg.com/uploads/facebook_logos/facebook_logos_PNG19748.png" />
+        <View style={{height:45,backgroundColor:'white'}}></View>
+      </ScrollView>
     )
   }
 }
@@ -91,7 +84,15 @@ const styles = StyleSheet.create({
     borderColor: 'white',
   },
   searchBar:{
-    flexDirection: 'row'
+    flexDirection: 'row',
+    backgroundColor: '#16a187',
+    padding: 10
+  },
+  searchColumn:{
+    flexDirection: 'row',
+    backgroundColor: '#1d7d68',
+    width: Dimensions.get('window').width * 6.7/8,
+    marginRight: 15,
   },
   searchIcon:{
     marginRight: 10,
@@ -102,7 +103,8 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   searchText:{
-    width:Dimensions.get('window').width * 6.5/8
+    width:Dimensions.get('window').width * 6.5/8,
+    color: 'white',
   }
 })
 

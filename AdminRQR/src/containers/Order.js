@@ -14,6 +14,8 @@ import {
 
 import TabHeader from '../components/TabHeader'
 
+import { setTab } from '../actions'
+
 const tables = [{
   status  : 'Ordering',
   name    : 'Stedy',
@@ -43,6 +45,10 @@ class Order extends Component{
       alignSelf: 'center',
     },
   })
+
+  componentWillMount(){
+    this.props.setTab(45)
+  }
 
   render(){
     return(
@@ -179,7 +185,7 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
   return{
-
+    setTab: (tab) => dispatch(setTab(tab))
   }
 }
 

@@ -1,10 +1,7 @@
-const initialState = true
+const initialState = 45
 
 export default (state = initialState,action) =>{
     if(action.type === 'Tab'){
-      if(!action.payload){
-        return initialState
-      }
       return action.payload
     }
     else{
