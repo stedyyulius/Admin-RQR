@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {
-  Text,
+import{
   View,
-  ScrollView,
-  StyleSheet
+  StyleSheet,
+  Text,
+  TouchableOpacity
 } from 'react-native'
 
-
-class Menu extends Component{
+class TypeMenu extends Component{
   constructor(props){
     super(props)
     this.state={}
@@ -16,9 +15,11 @@ class Menu extends Component{
   render(){
     return(
       <View>
-        <Text>
-          ini menu
-        </Text>
+        <TouchableOpacity>
+          <Text>
+            {this.props.text}
+          </Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
 
 })
 
-const mapStatetoProps = (state) =>{
+const mapStateToProps = (state) =>{
   return{
 
   }
@@ -40,4 +41,4 @@ const mapDispatchToProps = (dispatch) =>{
   }
 }
 
-export default connect (mapStatetoProps,mapDispatchToProps)(Menu)
+export default connect (mapStateToProps,mapDispatchToProps)(TypeMenu)

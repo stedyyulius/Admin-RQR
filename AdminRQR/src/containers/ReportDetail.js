@@ -4,29 +4,33 @@ import {
   StyleSheet,
   Text,
   Image,
-  View
+  View,
+  TextInput,
+  Dimensions,
+  TouchableOpacity
 } from 'react-native'
 
-class Profile extends Component{
+import Navbar from '../components/Navbar'
 
+class ReportDetail extends Component{
   static navigationOptions = ({ navigation }) => ({
     header:null
   })
-
   render(){
     return(
       <View style={{flex:1}}>
-        <Image source={{uri:'https://i.imgur.com/nnBG1s7.png'}} style={styles.profile}/>
+        <Navbar />
+        <Image source={{uri:'https://i.imgur.com/tKmxkKa.png'}} style={styles.report}/>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  profile:{
-    flex: 0.91,
+  report:{
     width: null,
-    height: null
+    height: null,
+    flex: 0.91,
   }
 })
 
@@ -42,4 +46,4 @@ const mapDispatchToProps = (dispatch) =>{
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Profile)
+export default connect(mapStateToProps,mapDispatchToProps)(ReportDetail)

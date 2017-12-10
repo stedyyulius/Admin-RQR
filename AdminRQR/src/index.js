@@ -7,9 +7,10 @@ import { StackNavigator } from 'react-navigation'
 
 import Order from './containers/Order'
 import Table from './containers/Table'
-import Menu from './containers/Menu'
+import Menus from './containers/Menus'
 import Profile from './containers/Profile'
 import Report from './containers/Report'
+import ReportDetail from './containers/ReportDetail'
 
 const deviceW = Dimensions.get('window').width
 const basePx = 375
@@ -23,7 +24,8 @@ const Navigator = StackNavigator({
 });
 
 const ReportNavigator = StackNavigator({
-  Report: { screen: Report }
+  Report: { screen: Report },
+  ReportDetail: { screen: ReportDetail }
 })
 
 class App extends Component{
@@ -51,12 +53,12 @@ class App extends Component{
             <Navigator />
           </TabNavigator.Item>
           <TabNavigator.Item
-            selected={this.state.selectedTab === 'menu'}
-            title="Menu"
+            selected={this.state.selectedTab === 'menus'}
+            title="Menus"
             renderIcon={() => <Icon name="cutlery" size={px2dp(22)} color="#666"/>}
             renderSelectedIcon={() => <Icon name="cutlery" size={px2dp(22)} color="#3496f0"/>}
-            onPress={() => this.setState({ selectedTab: 'menu' })}>
-            <Menu />
+            onPress={() => this.setState({ selectedTab: 'menus' })}>
+            <Menus />
           </TabNavigator.Item>
           <TabNavigator.Item
             selected={this.state.selectedTab === 'report'}

@@ -37,9 +37,9 @@ class Table extends Component{
     },
   })
 
-  componentWillMount(){
-    this.props.setTab(0)
-  }
+  // componentWillMount(){
+  //   this.props.setTab(0)
+  // }
 
   render(){
     const { navigate } = this.props.navigation

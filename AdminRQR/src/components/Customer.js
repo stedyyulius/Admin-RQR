@@ -27,7 +27,7 @@ class Customer extends Component{
 
   render(){
     return(
-      <TouchableOpacity style={styles.tableContainer}>
+      <TouchableOpacity style={styles.tableContainer} onPress={()=>this.props.navigation.navigate('ReportDetail')}>
         <View style={styles.tableBody}>
           <View style={styles.tableTop}>
             <Image style={styles.tablePic} source={{uri: this.props.photo}} />
