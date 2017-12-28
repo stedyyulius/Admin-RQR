@@ -15,7 +15,8 @@ import{
 import TabHeader from '../components/TabHeader'
 import CardOrder from '../components/CardOrder'
 import ClosedCard from '../components/ClosedCard'
-import Item from '../components/Item'
+import Items from '../components/Item'
+import Totals from '../components/Totals'
 
 import { setTab } from '../actions'
 
@@ -44,7 +45,7 @@ class Table extends Component{
   render(){
     const { navigate } = this.props.navigation
     return(
-      <ScrollView>
+      <ScrollView style={{backgroundColor:'white'}}>
         <TabHeader tabs={['Customer','Items']}/>
         <View>
           {(this.props.page === 0)
@@ -54,58 +55,9 @@ class Table extends Component{
                 ))}
                 <ClosedCard />
               </ScrollView>
-            : <View>
-                <Item item='Quinoa Salad' price={75000} ammount={1} />
-                <Item item='Extreme Berry Juice' price={50000} ammount={4} />
-                <Item item='Roast Chicken' price={150000} ammount={1} />
-                <Item item='Breakfast Grandslam' price={125000} ammount={1} />
-                <Item item='Blueberry French Toast' price={75000} ammount={1} />
-                <View style={styles.tableContainer}>
-                  <View style={{flexDirection: 'row',marginTop: 10}}>
-                      <Text style={styles.menuText}>
-                        Subtotal
-                      </Text>
-                      <View style={{flex:1}}></View>
-                      <View style={{alignSelf: 'flex-end'}}>
-                        <Text style={styles.menuText}>
-                          Rp 125,000
-                        </Text>
-                      </View>
-                  </View>
-                  <View style={{flexDirection: 'row'}}>
-                      <Text style={styles.menuText}>
-                        Service Charge (10%)
-                      </Text>
-                      <View style={{flex:1}}></View>
-                      <View style={{alignSelf: 'flex-end'}}>
-                        <Text style={styles.menuText}>
-                          Rp 12,500
-                        </Text>
-                      </View>
-                  </View>
-                  <View style={{flexDirection: 'row'}}>
-                      <Text style={styles.menuText}>
-                        Tax (10%)
-                      </Text>
-                      <View style={{flex:1}}></View>
-                      <View style={{alignSelf: 'flex-end'}}>
-                        <Text style={styles.menuText}>
-                          Rp 13,750
-                        </Text>
-                      </View>
-                  </View>
-                  <View style={{flexDirection: 'row',marginTop: 10}}>
-                      <Text style={styles.menuTotal}>
-                        Total
-                      </Text>
-                      <View style={{flex:1}}></View>
-                      <View style={{alignSelf: 'flex-end'}}>
-                        <Text style={styles.menuTotal}>
-                          Rp 151,250
-                        </Text>
-                      </View>
-                  </View>
-                </View>
+            : <View style={{padding: 10}}>
+                <Items />
+                <Totals />
               </View>
           }
         </View>
@@ -114,18 +66,18 @@ class Table extends Component{
             <View>
               <View style={{flexDirection:'row'}}>
                 <Text style={styles.detailAmmount}>
-                  8
+                  {this.props.order.totalAmmount}
                 </Text>
                 <Text style={styles.detailText}>
                   Items
                 </Text>
               </View>
               <Text style={styles.detailText}>
-                Rp756.250
+                Rp{this.props.order.grandTotal}
               </Text>
             </View>
           </View>
-          <View style={styles.bottom}>
+          <TouchableOpacity style={styles.bottom}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>
                 Confirm
@@ -134,7 +86,7 @@ class Table extends Component{
                 Payment
               </Text>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     )
@@ -198,10 +150,13 @@ const styles = StyleSheet.create({
     fontWeight: '500'
   },
   bottomContainer:{
+    borderTopWidth: 1,
+    borderBottomWidth: 0,
+    borderBottomColor: 'grey',
+    borderLeftColor: 'transparent',
     flexDirection: 'row',
     height: '100%',
     backgroundColor: 'white',
-    padding: 10,
     marginBottom: 45
   }
 })

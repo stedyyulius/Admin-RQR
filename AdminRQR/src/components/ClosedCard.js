@@ -103,15 +103,6 @@ const styles = StyleSheet.create({
   tableRightOrdering:{
     color: 'green'
   },
-  menuText:{
-    color: 'black',
-    fontSize: 16
-  },
-  menuTotal:{
-    fontWeight: '500',
-    fontSize: 16,
-    color: 'black'
-  }
 })
 
 const mapStateToProps = (state) =>{

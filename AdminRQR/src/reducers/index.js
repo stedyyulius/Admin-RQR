@@ -9,5 +9,5 @@ export default combineReducers({
   menus : menus,
   order : order,
   tab   : tab,
-  page  : page
+  page  : page,
 })

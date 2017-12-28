@@ -27,30 +27,34 @@ class Item extends Component{
 
   render(){
     return(
-      <TouchableOpacity style={styles.tableContainer}>
-        <View style={styles.tableBody}>
-          <View style={styles.tableTop}>
-            <Text style={styles.tableAmmount}>
-              {this.props.ammount}
-            </Text>
-            <View>
-              <Text style={styles.tableName}>
-                {this.props.item}
-              </Text>
-              <Text style={styles.tablePrice}>
-                Rp{this.props.price}
-              </Text>
+      (this.props.order)
+      ? (this.props.order.order.map((o,i)=>
+          <TouchableOpacity style={styles.tableContainer} key={i}> 
+            <View style={styles.tableBody}>
+              <View style={styles.tableTop}>
+                <Text style={styles.tableAmmount}>
+                  {o.ammount}
+                </Text>
+                <View>
+                  <Text style={styles.tableName}>
+                    {o.name}
+                  </Text>
+                  <Text style={styles.tablePrice}>
+                    Rp{o.price}
+                  </Text>
+                </View>
+                <View style={{flex: 1}}></View>
+                <View>
+                  <Text style={styles.tableName}>
+                    Rp{o.price * o.ammount}
+                  </Text>
+                  <View style={{flex: 1}}></View>
+                </View>
+              </View>
             </View>
-            <View style={{flex: 1}}></View>
-            <View>
-              <Text style={styles.tableName}>
-                Rp{this.props.price * this.props.ammount}
-              </Text>
-              <View style={{flex: 1}}></View>
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
+          </TouchableOpacity>
+        ))
+      : <Text>No Order</Text>
     )
   }
 }

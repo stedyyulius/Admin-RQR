@@ -13,6 +13,10 @@ import{
   Dimensions
 } from 'react-native'
 
+import Totals from './Totals'
+
+import { getOrder } from '../actions'
+
 class CardOrder extends Component{
   constructor(props){
     super(props)
@@ -21,9 +25,27 @@ class CardOrder extends Component{
     }
   }
 
-  // componentDidMount(){
-  //   alert(JSON.stringify(AppState))
-  // }
+  componentDidMount(){
+    this.props.getOrder()
+  }
+
+  serviceCharge(){
+    if (this.props.order) {
+      return this.props.order.totalPrice / 10
+    }
+  }
+
+  tax(){
+    if (this.props.order) {
+      return this.props.order.totalPrice + this.serviceCharge() / 10
+    }
+  }
+
+  totalPrice(){
+    if (this.props.order) {
+      return this.props.order.totalPrice + this.serviceCharge() + this.tax()
+    }
+  }
 
   render(){
     return(
@@ -44,28 +66,25 @@ class CardOrder extends Component{
               <View style={{flex: 1}}></View>
             </View>
           </View>
-          <View style={{flexDirection: 'row'}}>
-              <Text style={styles.menuText}>
-                1 Quinoa Salad
-              </Text>
-              <View style={{flex:1}}></View>
-              <View style={{alignSelf: 'flex-end'}}>
-                <Text style={styles.menuText}>
-                  Rp 75,000
-                </Text>
-              </View>
-          </View>
-          <View style={{flexDirection: 'row'}}>
-              <Text style={styles.menuText}>
-                2 Extreme Berry Juice
-              </Text>
-              <View style={{flex:1}}></View>
-              <View style={{alignSelf: 'flex-end'}}>
-                <Text style={styles.menuText}>
-                  Rp 50,000
-                </Text>
-              </View>
-          </View>
+          {(this.props.order.order)
+            ? (this.props.order.order.map((o,i)=>
+                <View style={{flexDirection: 'row'}} key={i}>
+                    <Text style={styles.menuText}>
+                      {o.ammount}
+                    </Text>
+                    <Text style={styles.menuText}>
+                      {o.name}
+                    </Text>
+                    <View style={{flex:1}}></View>
+                    <View style={{alignSelf: 'flex-end'}}>
+                      <Text style={styles.menuText}>
+                        Rp{o.price}
+                      </Text>
+                    </View>
+                </View>
+              ))
+            : <Text>Loading...</Text>
+          }
           <View style={{paddingLeft: 12}}>
             <Text>
                Memo:
@@ -73,50 +92,7 @@ class CardOrder extends Component{
             <Text>
               No Sugar
             </Text>
-          </View>
-          <View style={{flexDirection: 'row',marginTop: 10}}>
-              <Text style={styles.menuText}>
-                Subtotal
-              </Text>
-              <View style={{flex:1}}></View>
-              <View style={{alignSelf: 'flex-end'}}>
-                <Text style={styles.menuText}>
-                  Rp 125,000
-                </Text>
-              </View>
-          </View>
-          <View style={{flexDirection: 'row'}}>
-              <Text style={styles.menuText}>
-                Service Charge (10%)
-              </Text>
-              <View style={{flex:1}}></View>
-              <View style={{alignSelf: 'flex-end'}}>
-                <Text style={styles.menuText}>
-                  Rp 12,500
-                </Text>
-              </View>
-          </View>
-          <View style={{flexDirection: 'row'}}>
-              <Text style={styles.menuText}>
-                Tax (10%)
-              </Text>
-              <View style={{flex:1}}></View>
-              <View style={{alignSelf: 'flex-end'}}>
-                <Text style={styles.menuText}>
-                  Rp 13,750
-                </Text>
-              </View>
-          </View>
-          <View style={{flexDirection: 'row',marginTop: 10}}>
-              <Text style={styles.menuTotal}>
-                Total
-              </Text>
-              <View style={{flex:1}}></View>
-              <View style={{alignSelf: 'flex-end'}}>
-                <Text style={styles.menuTotal}>
-                  Rp 151,250
-                </Text>
-              </View>
+            <Totals />
           </View>
         </View>
       </TouchableOpacity>
@@ -166,7 +142,8 @@ const styles = StyleSheet.create({
   },
   menuText:{
     color: 'black',
-    fontSize: 16
+    fontSize: 16,
+    marginRight: 10
   },
   menuTotal:{
     fontWeight: '500',
@@ -183,7 +160,7 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
   return{
-
+    getOrder: () => dispatch(getOrder())
   }
 }
 

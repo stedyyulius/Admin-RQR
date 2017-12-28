@@ -1,3 +1,5 @@
+import firebase from '../firebase'
+
 export const setTab = (status) =>{
   return{
     type: 'Tab',
@@ -9,5 +11,19 @@ export const setPage = (page) =>{
   return{
     type: 'Page',
     payload: page
+  }
+}
+
+export const getOrder = () =>{
+  return (dispatch) =>{
+    firebase.database()
+            .ref('order')
+            .on('value', (snapshot) => {
+              let order = snapshot.val() || []
+              dispatch({
+                type: 'Order',
+                payload: order
+              })
+            });
   }
 }
