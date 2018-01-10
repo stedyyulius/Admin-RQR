@@ -27,3 +27,10 @@ export const getOrder = () =>{
             });
   }
 }
+
+export const setLogin = (status) =>{
+  return{
+    type: 'Login',
+    payload: status
+  }
+}
