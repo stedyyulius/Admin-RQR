@@ -34,3 +34,17 @@ export const setLogin = (status) =>{
     payload: status
   }
 }
+
+export const addMenu = (menu) =>{
+  return (dispatch) =>{
+    firebase.database().ref('menu').set(menu)
+    firebase.database()
+            .ref('order')
+            .on('value', (snapshot) => {
+              dispatch({
+                type: 'Menus',
+                payload: snapshot.val()
+              })
+            });
+  }
+}

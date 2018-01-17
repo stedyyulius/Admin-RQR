@@ -10,12 +10,15 @@ import{
   NavigatorAndroid,
   Image,
   Button,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from 'react-native'
 
-// import MenuButton from '../components/MenuButton'
+import MenuButton from '../components/MenuButton'
 import MenuType from '../components/MenuType'
 import MenuList from '../components/MenuList'
+
+import { addMenu } from '../actions'
 
 class Menus extends Component{
   constructor(props){
@@ -59,13 +62,12 @@ class Menus extends Component{
               <Text style={styles.restaurantSubTitle}>
                 Opening Hours: 10:00 - 22:00
               </Text>
+              <MenuButton />
             </View>
           </View>
-            <View style={styles.buttonContainer}>
-              {/* <MenuButton text="Food"/>
-              <MenuButton text="Drink"/>
-              <MenuButton text="Dessert"/> */}
-            </View>
+            {/* <View style={styles.buttonContainer}>
+
+            </View> */}
             <View style={styles.actions}>
               <MenuType text="Appetizer"/>
               <MenuType text="Pasta"/>
@@ -73,12 +75,29 @@ class Menus extends Component{
               <MenuType text="Seafood"/>
             </View>
             <View style={styles.menuContainer}>
-              <MenuList pic='https://media-cdn.tripadvisor.com/media/photo-s/09/74/41/2e/abuba-steak.jpg' title="T-Bone Steak" price={150000}/>
+              {/* {(this.state.isAdd)
+                ? <View>
+                    <Text>
+                      Copy Image Url here
+                    </Text>
+                    <TextInput />
+                  </View>
+                :
+              } */}
+              <View style={styles.addItem}>
+                <View style={styles.addItemRectangle}></View>
+                <TouchableOpacity style={{alignSelf:'center'}}>
+                  <Text style={styles.addItemText}>
+                    + Add Item
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              {/* <MenuList pic='https://media-cdn.tripadvisor.com/media/photo-s/09/74/41/2e/abuba-steak.jpg' title="T-Bone Steak" price={150000}/>
               <MenuList pic='http://hargamenu.com/wp-content/uploads/2014/09/harga-abuba-steak.jpg' title="Rib-Eye NZ Steak" price={120000}/>
               <MenuList pic='http://1.bp.blogspot.com/-kbxbz-l46z4/VF9bp5MNegI/AAAAAAAABGs/6mUcvnZKCKA/s1600/Abuba-Steak.jpg' price={100000} title="Sirloin Steak"/>
               <MenuList pic='https://img.qraved.co/v2/image/data/Indonesia/Jakarta/Tebet/Abuba_Steak/sirloin_us_steak-640x424.png' price={150000} title="Sirloin US Steak"/>
               <MenuList pic='http://www.sparetime.jakartafamilia.com/wp-content/uploads/2016/11/ABUBA-STEAK-IMAGE-4.jpg' price={250000} title="Sirloin Wagyu"/>
-              <MenuList pic='http://cityhighlight.com/wp-content/uploads/2016/02/Tenderlionn.png' price={70000} title="Tenderloin Steak"/>
+              <MenuList pic='http://cityhighlight.com/wp-content/uploads/2016/02/Tenderlionn.png' price={70000} title="Tenderloin Steak"/> */}
             </View>
           </ScrollView>
       </View>
@@ -101,25 +120,6 @@ const styles = StyleSheet.create({
    marginTop: 7,
    marginRight: 10
  },
-  centerText: {
-    fontSize: 18,
-    padding: 32,
-    color: '#777',
-  },
-
-  textBold: {
-    fontWeight: '500',
-    color: '#000',
-  },
-
-  buttonText: {
-    fontSize: 21,
-    color: 'rgb(0,122,255)',
-  },
-
-  buttonTouchable: {
-    padding: 16,
-  },
   restaurant:{
     alignSelf: 'stretch',
     height: 170,
@@ -144,33 +144,6 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 15,
   },
-  review:{
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: '#16a187',
-    flexDirection: 'row',
-    padding: 8,
-    justifyContent: 'center'
-  },
-  reviewPrice:{
-    color: 'white',
-    fontWeight: 'bold',
-    alignSelf: 'flex-end'
-  },
-  reviewOrder:{
-    flex: 1,
-    color:'white',
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    textAlign: 'center'
-  },
-  reviewAmmount:{
-    color: 'white',
-    fontWeight: 'bold',
-    alignSelf: 'flex-start'
-  },
   restaurantTitle:{
     justifyContent: 'center',
     alignSelf: 'center',
@@ -188,19 +161,35 @@ const styles = StyleSheet.create({
     height: 170
   },
   menuContainer:{
-    marginBottom: 100
+    marginBottom: 100,
+    padding: 20
+  },
+  addItem:{
+    width: Dimensions.get('window').width,
+    flexDirection: 'row',
+    flex: 1
+  },
+  addItemRectangle:{
+    backgroundColor: '#d8d8d8',
+    width: 120,
+    height: 100
+  },
+  addItemText:{
+    color: '#4a90e2',
+    fontSize: 20,
+    marginLeft: 50
   }
 })
 
 const mapStateToProps = (state) =>{
   return{
-
+    menus: state.menus
   }
 }
 
 const mapDispatchToProps = (dispatch) =>{
   return{
-
+    addMenu: (menu) => dispatch(addMenu(menu))
   }
 }
 
