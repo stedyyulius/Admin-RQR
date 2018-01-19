@@ -1,5 +1,6 @@
 import React , { Component } from 'react'
 import { connect } from 'react-redux'
+import ImagePicker from 'react-native-image-picker'
 import {
   StyleSheet,
   Text,
@@ -10,6 +11,17 @@ import {
   ScrollView,
   Dimensions
 } from 'react-native'
+
+const options = {
+  title: 'Select Restaurant Image',
+  // customButtons: [
+  //   {name: 'fb', title: 'Choose Photo from Facebook'},
+  // ],
+  storageOptions: {
+    skipBackup: true,
+    path: 'images'
+  }
+};
 
 class Profile extends Component{
   constructor(props){
@@ -24,12 +36,36 @@ class Profile extends Component{
     header:null
   })
 
+  upload(){
+  ImagePicker.launchImageLibrary(options, (response) => {
+  alert(response.uri);
+
+  if (response.didCancel) {
+    console.log('User cancelled image picker');
+  }
+  else if (response.error) {
+    console.log('ImagePicker Error: ', response.error);
+  }
+  else if (response.customButton) {
+    console.log('User tapped custom button: ', response.customButton);
+  }
+  else {
+    // You can also display the image using data:
+    // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+    this.setState({
+      image: response.uri
+    });
+  }
+});
+  }
+
   render(){
     return(
       <View style={styles.container}>
         <ScrollView>
           <View>
-            <TouchableOpacity style={styles.restaurant} onPress={()=>this.setState({onAdd:true})}>
+            <TouchableOpacity style={styles.restaurant} onPress={()=>this.upload()}>
               <Image
                 style={styles.restaurant}
                 source={{uri:this.state.image}}
