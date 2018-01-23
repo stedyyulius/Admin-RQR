@@ -5,11 +5,13 @@ import order from './order-reducer'
 import tab from './tab-reducer'
 import page from './page-reducer'
 import login from './login-reducer'
+import restaurant from './restaurant-reducer'
 
 export default combineReducers({
   menus : menus,
   order : order,
   tab   : tab,
   page  : page,
-  login : login
+  login : login,
+  restaurant: restaurant
 })

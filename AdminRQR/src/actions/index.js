@@ -1,6 +1,8 @@
 import firebase from '../firebase'
 import DeviceInfo from 'react-native-device-info';
 
+const deviceId = DeviceInfo.getUniqueID()
+
 export const setTab = (status) =>{
   return{
     type: 'Tab',
@@ -52,7 +54,6 @@ export const addMenu = (menu) =>{
 
 export const addRestaurant = (restaurant) =>{
   return (dispatch) =>{
-    let deviceId = DeviceInfo.getUniqueID()
     firebase.database().ref(`restaurant/${deviceId}`).set(restaurant)
     firebase.database()
             .ref(`restaurant/${deviceId}`)
@@ -65,7 +66,7 @@ export const addRestaurant = (restaurant) =>{
   }
 }
 
-export getRestaurant = () =>{
+export const getRestaurant = () =>{
   return (dispatch) =>{
     firebase.database()
             .ref(`restaurant/${deviceId}`)

@@ -13,6 +13,8 @@ import {
   Picker
 } from 'react-native'
 
+import { getRestaurant, addRestaurant } from '../actions'
+
 const options = {
   title: 'Select Restaurant Image',
   // customButtons: [
@@ -28,8 +30,13 @@ class Profile extends Component{
   constructor(props){
     super(props)
     this.state={
+      onAdd: false,
       image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Restaurant_building_clip_art.svg/2000px-Restaurant_building_clip_art.svg.png',
-      onAdd: false
+      businessName: '',
+      address: '',
+      businessTags: '',
+      averagePrice: '',
+      openingHours: '',
     }
   }
 
@@ -37,28 +44,42 @@ class Profile extends Component{
     header:null
   })
 
+  componentDidMount(){
+    this.props.getRestaurant()
+  }
+
+  async componentWillReceiveProps(){
+    let data = this.props.restaurant
+    await data
+    this.setState({
+      image: this.props.restaurant.image,
+      businessName: this.props.restaurant.businessName,
+      address: this.props.restaurant.address,
+      businessTags: this.props.restaurant.businessTags,
+      averagePrice: this.props.restaurant.averagePrice,
+      openingHours: this.props.restaurant.openingHours,
+    })
+  }
+
   upload(){
-  ImagePicker.launchImageLibrary(options, (response) => {
-  alert(response.uri);
-
-  if (response.didCancel) {
-    console.log('User cancelled image picker');
-  }
-  else if (response.error) {
-    console.log('ImagePicker Error: ', response.error);
-  }
-  else if (response.customButton) {
-    console.log('User tapped custom button: ', response.customButton);
-  }
-  else {
-    // You can also display the image using data:
-    // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
+    ImagePicker.launchImageLibrary(options, (response) => {
     this.setState({
       image: response.uri
     });
-  }
 });
+  }
+
+  addRestaurant(){
+    let restaurant = {
+      image: this.state.image,
+      businessName: this.state.businessName,
+      address: this.state.address,
+      businessTags: this.state.businessTags,
+      averagePrice: this.state.averagePrice,
+      openingHours: this.state.openingHours,
+    }
+    this.props.addRestaurant(restaurant)
+    alert('Restaurant Data Saved')
   }
 
 
@@ -85,27 +106,47 @@ class Profile extends Component{
             <Text>
               Business Name
             </Text>
-            <TextInput />
+            <TextInput
+              value={this.state.businessName}
+              editable={true}
+              onChangeText={(e)=> this.setState({businessName:e})}
+            />
 
             <Text>
               Address
             </Text>
-            <TextInput />
+            <TextInput
+              value={this.state.address}
+              editable={true}
+              onChangeText={(e)=> this.setState({address:e})}
+            />
 
             <Text>
               Business Tags
             </Text>
-            <TextInput />
+            <TextInput
+              value={this.state.businessTags}
+              editable={true}
+              onChangeText={(e)=> this.setState({businessTags:e})}
+            />
 
             <Text>
               Average Price For One
             </Text>
-            <TextInput />
+            <TextInput
+              value={this.state.averagePrice}
+              editable={true}
+              onChangeText={(e)=> this.setState({averagePrice:e})}
+            />
 
             <Text>
               Opening Hours
             </Text>
-            <TextInput />
+            <TextInput
+              value={this.state.openingHours}
+              editable={true}
+              onChangeText={(e)=> this.setState({openingHours:e})}
+            />
             {/* <View style={styles.date}>
               <View style={styles.dateInput}>
                 <Text style={{textAlign: 'center'}}>
@@ -177,9 +218,14 @@ class Profile extends Component{
                   <Picker.Item label="23:00 AM" value="23:00 AM" />
                   <Picker.Item label="24:00 AM" value="24:00 AM" />
                 </Picker>
-              </View> */}
-            </View>
+              </View>
+            </View> */}
           </View>
+          <TouchableOpacity style={styles.save} onPress={()=>this.addRestaurant()}>
+            <Text style={styles.saveText}>
+              Save
+            </Text>
+          </TouchableOpacity>
         </ScrollView>
       </View>
     )
@@ -217,7 +263,6 @@ const styles = StyleSheet.create({
   form:{
     marginTop: 20,
     padding: 25,
-    marginBottom: 50
   },
   date:{
     flexDirection: 'row',
@@ -227,18 +272,28 @@ const styles = StyleSheet.create({
   dateInput:{
     width: Dimensions.get('window').width / 3.5,
     justifyContent: 'center',
+  },
+  save:{
+    backgroundColor: 'black',
+    padding: 10,
+    marginBottom: 50
+  },
+  saveText:{
+    color: 'white',
+    textAlign: 'center'
   }
 })
 
 const mapStateToProps = (state) =>{
   return{
-
+    restaurant: state.restaurant
   }
 }
 
 const mapDispatchToProps = (dispatch) =>{
   return{
-
+    getRestaurant: () => dispatch(getRestaurant()),
+    addRestaurant: (restaurant) => dispatch(addRestaurant(restaurant))
   }
 }
 
