@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
-  Dimensions
+  Dimensions,
+  Picker
 } from 'react-native'
 
 const options = {
@@ -60,6 +61,7 @@ class Profile extends Component{
 });
   }
 
+
   render(){
     return(
       <View style={styles.container}>
@@ -103,25 +105,79 @@ class Profile extends Component{
             <Text>
               Opening Hours
             </Text>
-            <View style={styles.date}>
+            <TextInput />
+            {/* <View style={styles.date}>
               <View style={styles.dateInput}>
                 <Text style={{textAlign: 'center'}}>
                   Day
                 </Text>
-                <TextInput />
+                <Picker>
+                  <Picker.Item label="Mon-Sun" value="Mon-Sun" />
+                  <Picker.Item label="Mon-Fri" value="Mon-Fri" />
+                </Picker>
               </View>
               <View style={styles.dateInput}>
                 <Text style={{textAlign: 'center'}}>
                   Open
                 </Text>
-                <TextInput />
+                <Picker>
+                  <Picker.Item label="01:00 AM" value="01:00 AM" />
+                  <Picker.Item label="02:00 AM" value="02:00 AM" />
+                  <Picker.Item label="03:00 AM" value="03:00 AM" />
+                  <Picker.Item label="04:00 AM" value="04:00 AM" />
+                  <Picker.Item label="05:00 AM" value="05:00 AM" />
+                  <Picker.Item label="06:00 AM" value="06:00 AM" />
+                  <Picker.Item label="07:00 AM" value="07:00 AM" />
+                  <Picker.Item label="08:00 AM" value="08:00 AM" />
+                  <Picker.Item label="09:00 AM" value="09:00 AM" />
+                  <Picker.Item label="10:00 AM" value="10:00 AM" />
+                  <Picker.Item label="11:00 AM" value="11:00 AM" />
+                  <Picker.Item label="12:00 AM" value="12:00 AM" />
+                  <Picker.Item label="13:00 AM" value="13:00 AM" />
+                  <Picker.Item label="14:00 AM" value="14:00 AM" />
+                  <Picker.Item label="15:00 AM" value="15:00 AM" />
+                  <Picker.Item label="16:00 AM" value="16:00 AM" />
+                  <Picker.Item label="17:00 AM" value="17:00 AM" />
+                  <Picker.Item label="18:00 AM" value="18:00 AM" />
+                  <Picker.Item label="19:00 AM" value="19:00 AM" />
+                  <Picker.Item label="20:00 AM" value="20:00 AM" />
+                  <Picker.Item label="21:00 AM" value="21:00 AM" />
+                  <Picker.Item label="22:00 AM" value="22:00 AM" />
+                  <Picker.Item label="23:00 AM" value="23:00 AM" />
+                  <Picker.Item label="24:00 AM" value="24:00 AM" />
+                </Picker>
               </View>
               <View style={styles.dateInput}>
                 <Text style={{textAlign: 'center'}}>
                   Close
                 </Text>
-                <TextInput />
-              </View>
+                <Picker>
+                  <Picker.Item label="01:00 AM" value="01:00 AM" />
+                  <Picker.Item label="02:00 AM" value="02:00 AM" />
+                  <Picker.Item label="03:00 AM" value="03:00 AM" />
+                  <Picker.Item label="04:00 AM" value="04:00 AM" />
+                  <Picker.Item label="05:00 AM" value="05:00 AM" />
+                  <Picker.Item label="06:00 AM" value="06:00 AM" />
+                  <Picker.Item label="07:00 AM" value="07:00 AM" />
+                  <Picker.Item label="08:00 AM" value="08:00 AM" />
+                  <Picker.Item label="09:00 AM" value="09:00 AM" />
+                  <Picker.Item label="10:00 AM" value="10:00 AM" />
+                  <Picker.Item label="11:00 AM" value="11:00 AM" />
+                  <Picker.Item label="12:00 AM" value="12:00 AM" />
+                  <Picker.Item label="13:00 AM" value="13:00 AM" />
+                  <Picker.Item label="14:00 AM" value="14:00 AM" />
+                  <Picker.Item label="15:00 AM" value="15:00 AM" />
+                  <Picker.Item label="16:00 AM" value="16:00 AM" />
+                  <Picker.Item label="17:00 AM" value="17:00 AM" />
+                  <Picker.Item label="18:00 AM" value="18:00 AM" />
+                  <Picker.Item label="19:00 AM" value="19:00 AM" />
+                  <Picker.Item label="20:00 AM" value="20:00 AM" />
+                  <Picker.Item label="21:00 AM" value="21:00 AM" />
+                  <Picker.Item label="22:00 AM" value="22:00 AM" />
+                  <Picker.Item label="23:00 AM" value="23:00 AM" />
+                  <Picker.Item label="24:00 AM" value="24:00 AM" />
+                </Picker>
+              </View> */}
             </View>
           </View>
         </ScrollView>
@@ -160,7 +216,8 @@ const styles = StyleSheet.create({
   },
   form:{
     marginTop: 20,
-    padding: 25
+    padding: 25,
+    marginBottom: 50
   },
   date:{
     flexDirection: 'row',

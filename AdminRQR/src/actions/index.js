@@ -1,4 +1,5 @@
 import firebase from '../firebase'
+import DeviceInfo from 'react-native-device-info';
 
 export const setTab = (status) =>{
   return{
@@ -39,10 +40,38 @@ export const addMenu = (menu) =>{
   return (dispatch) =>{
     firebase.database().ref('menu').set(menu)
     firebase.database()
-            .ref('order')
+            .ref('menu')
             .on('value', (snapshot) => {
               dispatch({
                 type: 'Menus',
+                payload: snapshot.val()
+              })
+            });
+  }
+}
+
+export const addRestaurant = (restaurant) =>{
+  return (dispatch) =>{
+    let deviceId = DeviceInfo.getUniqueID()
+    firebase.database().ref(`restaurant/${deviceId}`).set(restaurant)
+    firebase.database()
+            .ref(`restaurant/${deviceId}`)
+            .on('value', (snapshot) => {
+              dispatch({
+                type: 'Restaurant',
+                payload: snapshot.val()
+              })
+            });
+  }
+}
+
+export getRestaurant = () =>{
+  return (dispatch) =>{
+    firebase.database()
+            .ref(`restaurant/${deviceId}`)
+            .on('value', (snapshot) => {
+              dispatch({
+                type: 'Restaurant',
                 payload: snapshot.val()
               })
             });
